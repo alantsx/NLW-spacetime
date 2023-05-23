@@ -1,3 +1,6 @@
 {
-  "extends": []
+  "extends": [],
+  "rules": {
+    "semi": ["error", "always"]
+  }
 }
