@@ -41,3 +41,11 @@ Usado para fazer requisições HTTP. Por mais que exista a fetch API ativa do No
 ## Autenticação JWT
 
 JSON Web Token - Identificar um usuário logado
+
+## Fastify/multipart
+
+Usado para o upload de imagem nas rotas de upload. Dessa forma evita-se que se use um arquivo em base-64, o que apesar de deixar o código mais simples deixaria a imagem mais pesada e não-otimizada.
+
+## Feature de steaming do Node.JS
+
+Sistema do note para escrever um arquivo em partes. O pipeline permite aguardar e verificar o processo de upload finalizar. Após isso, ele transformará a função de pipeline numa promise usando o promisify.
