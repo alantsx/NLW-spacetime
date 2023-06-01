@@ -1,14 +1,17 @@
 import { Image, ScrollView, Text, View } from "react-native";
 import Icon from '@expo/vector-icons/Feather'
 import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { Switch, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
+import * as SecureStore from 'expo-secure-store'
+import { api } from "../src/lib/api";
 
 export default function NewMemory() {
   const { bottom, top } = useSafeAreaInsets()
+  const router = useRouter()
 
   const [isPublic, setIsPublic] = useState(false)
   const [content, setContent] = useState('')
@@ -25,12 +28,44 @@ export default function NewMemory() {
         setPreview(result.assets[0].uri)
       }
     } catch (err) {
-      
+
     }
   }
 
-  function handleCreateMemory() {
+  async function handleCreateMemory() {
+    const token = await SecureStore.getItemAsync('token')
 
+    let coverUrl = ''
+
+    if (preview) {
+      const uploadFormData = new FormData()
+
+      uploadFormData.append('file', {
+        uri: preview,
+        name: 'image.jpg',
+        type: 'image/jpeg'
+      } as any)
+
+      const uploadResponse = await api.post('/upload', uploadFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      coverUrl = uploadResponse.data.fileUrl
+    }
+
+    await api.post('/memories', {
+      content,
+      isPublic,
+      coverUrl,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    router.push('/memories')
   }
 
   return (
@@ -77,6 +112,7 @@ export default function NewMemory() {
 
         <TextInput
           multiline
+          textAlignVertical="top"
           value={content}
           onChangeText={setContent}
           className="p-0 font-body text-lg text-gray-50"
