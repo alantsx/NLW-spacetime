@@ -1,15 +1,16 @@
 export function Copyright() {
     return (
         <div className="text-sm leading-relaxed text-gray-200">
-          Feito por Alan Fabrício na Next Level Week da{" "}
+          Made by {" "}
           <a
-            href="https://rocketseat.com.br"
+            href="https://github.com/alantsx"
             className="underline hover:text-gray-100"
             target="_blank"
             rel="noreferrer"
           >
-            Rocketseat
+            Alan Fabricio
           </a>
+           {" "}on Next Level Week from Rocketseat
         </div>
     )
 }
