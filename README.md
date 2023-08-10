@@ -2,7 +2,7 @@
 
 Spacetime is a project that allows you to save memories through text posts with images and videos to be displayed on a timeline. The project features some interesting technologies such as login with GitHub account via OAuth, JWT authentication, Fastify, Axios, and others.
 
-<img src="https://github.com/alantsx/NLW-spacetime/blob/main/readme-assets/showcase.gif?raw=true" alt="showcase gif" style="height: 350px;"/>
+<img src="https://github.com/alantsx/NLW-spacetime/blob/master/readme-assets/showcase.gif?raw=true" alt="showcase gif" style="height: 350px;"/>
 
 ## Back-end
 Built on Node.JS + TyeScript using NestJS Framework. Main techs:
